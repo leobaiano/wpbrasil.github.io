@@ -20,4 +20,9 @@ tab_width = 2
 
 [*.yml]
 indent_size = 2
-tab_width = 2
+
+[Rakefile]
+indent_size = 2
+
+[*.rb]
+indent_size = 2
