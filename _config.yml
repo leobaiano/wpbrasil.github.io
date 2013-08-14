@@ -1,7 +1,7 @@
 name: Grupo de Usuários WordPress Brasil
 pygments: true
 permalink: /:categories/:title/
-exclude: [".editorconfig", "Rakefile", "README.md", "config.rb"]
+exclude: [".editorconfig", "Rakefile", "README.md", "config.rb", "Gemfile*"]
 production_url: http://wp.org.br
 git:
   branch: gh-pages
