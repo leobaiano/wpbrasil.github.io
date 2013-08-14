@@ -10,9 +10,10 @@ config = YAML.load_file("_config.yml")
 task :default => :watch
 
 # rake build
-desc "Generate the site"
+desc "Build the site"
 task :build do
-  sh "jekyll build"
+  sh "jekyll build --safe"
+  puts "Build is ready"
 end
 
 # rake watch
@@ -79,4 +80,6 @@ task :deploy => [:build] do
     end
     sh "git push origin gh-pages"
   end
+
+  puts "Deploy is ready!"
 end
