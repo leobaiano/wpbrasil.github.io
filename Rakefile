@@ -122,3 +122,45 @@ HTML
     puts "Post \"#{title}\" created!"
   end
 end
+
+# rake new_page["Post title","layout","path/to/page"]
+desc "Create a page"
+task :new_page, :title, :layout, :path do |t, args|
+  title = args[:title]
+  layout = args[:layout]
+  path = args[:path]
+
+  if title.nil? or title.empty?
+    raise "Please add a title to your page."
+  end
+
+  if layout.nil? or layout.empty?
+    layout = "default"
+  end
+
+  if path.nil? or path.empty?
+    path = "./"
+  else
+    FileUtils.mkdir_p("#{path}")
+  end
+
+  filename = "#{title.gsub(/(\'|\!|\?|\:|\s\z)/,"").gsub(/\s/,"-").downcase}.md"
+  filepath = "#{path}/#{filename}"
+  content = <<-HTML
+---
+layout: LAYOUT
+title: "TITLE"
+---
+
+HTML
+
+  if File.exists?(filepath)
+    raise "The post already exists."
+  else
+    content.gsub!("LAYOUT", layout).gsub!("TITLE", title)
+    File.open(filepath, "w") do |file|
+      file.puts content
+    end
+    puts "Page \"#{title}\" created!"
+  end
+end
