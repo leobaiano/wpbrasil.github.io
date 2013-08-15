@@ -1,4 +1,5 @@
 # Libraries
+require 'rubygems'
 require 'rake'
 require 'yaml'
 require 'fileutils'
@@ -48,8 +49,7 @@ desc "Deploy to Github Pages"
 task :deploy => [:build] do
   # Stops if has pending files to commit
   if /nothing to commit/ !~ `git status`
-    puts "Commit your modifications before to make the deploy!"
-    fail
+    raise "Commit your modifications before to make the deploy!"
   end
 
   # Sets the deploy commit
@@ -74,7 +74,7 @@ task :deploy => [:build] do
   cd config["deploy"] do
     sh 'git add -A'
     if /nothing to commit/ =~ `git status`
-      puts "No changes to commit."
+      raise "No changes to commit."
     else
       sh "git commit -m \"#{message}\""
     end
@@ -82,4 +82,41 @@ task :deploy => [:build] do
   end
 
   puts "Deploy is ready!"
+end
+
+# rake new_post["Post title", "Categories"]
+desc "Create a post in _posts"
+task :post, :title, :categories do |t, args|
+  title = args[:title]
+  categories = args[:categories]
+  editor = config["editor"]
+  type = "post"
+
+  if title.nil? or title.empty?
+    raise "Please add a title to your post."
+  end
+
+  date = Time.now.strftime("%Y-%m-%d")
+  post_date = Time.now.strftime("%Y-%m-%d %H:%M")
+  filename = "#{date}-#{title.gsub(/(\'|\!|\?|\:|\s\z)/, "").gsub(/\s/, "-").downcase}.md"
+  path = File.join("_posts", filename)
+  content = <<-HTML
+---
+layout: post
+title: "TITLE"
+date: DATE
+categories: CATEGORIES
+---
+
+HTML
+
+  if File.exists?(path)
+    raise "The post already exists."
+  else
+    content.gsub!("TITLE", title).gsub!("DATE", post_date).gsub!("CATEGORIES", categories)
+    File.open(path, "w") do |file|
+      file.puts content
+    end
+    puts "Post \"#{title}\" created!"
+  end
 end
