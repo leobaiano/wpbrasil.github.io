@@ -84,16 +84,18 @@ task :deploy => [:build] do
   puts "Deploy is ready!"
 end
 
-# rake new_post["Post title", "Categories"]
+# rake new_post["Post title","Categories"]
 desc "Create a post"
 task :new_post, :title, :categories do |t, args|
   title = args[:title]
   categories = args[:categories]
-  editor = config["editor"]
-  type = "post"
 
   if title.nil? or title.empty?
     raise "Please add a title to your post."
+  end
+
+  if categories.nil? or categories.empty?
+    categories = ""
   end
 
   date = Time.now.strftime("%Y-%m-%d")
