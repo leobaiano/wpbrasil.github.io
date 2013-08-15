@@ -21,3 +21,11 @@ Site do Grupo de Usuários WordPress Brasil
 ##### Fazer deploy #####
 
     $ rake deploy
+
+##### Publicar um post #####
+
+    $ rake new_post["Post Title","categories"]
+
+##### Publicar uma página #####
+
+    $ rake new_page["Page Title","layout","path/to/file"]
