@@ -85,8 +85,8 @@ task :deploy => [:build] do
 end
 
 # rake new_post["Post title", "Categories"]
-desc "Create a post in _posts"
-task :post, :title, :categories do |t, args|
+desc "Create a post"
+task :new_post, :title, :categories do |t, args|
   title = args[:title]
   categories = args[:categories]
   editor = config["editor"]
