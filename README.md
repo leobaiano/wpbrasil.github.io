@@ -1,10 +1,10 @@
 Site do Grupo de Usuários WordPress Brasil
 
-### Instalar dependencias ###
+### Instalar dependências ###
 
     $ bundle install
 
-### Commandos rake ###
+### Comandos rake ###
 
 ##### Assistir o projeto #####
 
