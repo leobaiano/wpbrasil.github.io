@@ -2,8 +2,7 @@ source :rubygems
 
 group :development do
   gem "rake"
-  gem "RedCloth"
-  gem "jekyll"
+  gem "github-pages"
   gem 'pygments.rb'
   gem "launchy"
   gem "compass"
