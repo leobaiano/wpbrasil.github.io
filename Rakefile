@@ -62,7 +62,7 @@ task :deploy => [:build] do
     sh "git clone -b #{config["git"]["branch"]} git@github.com:#{config["git"]["user"]}/#{config["git"]["repo"]}.git _deploy"
   else
     cd config["deploy"] do
-      puts "Updating the gh-pages branch"
+      puts "Updating the #{config["git"]["branch"]} branch"
       sh "git pull"
     end
   end
@@ -78,7 +78,7 @@ task :deploy => [:build] do
     else
       sh "git commit -m \"#{message}\""
     end
-    sh "git push origin gh-pages"
+    sh "git push origin #{config["git"]["branch"]}"
   end
 
   puts "Deploy is ready!"
