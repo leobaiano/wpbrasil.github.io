@@ -58,8 +58,8 @@ task :deploy => [:build] do
 
   # Create or updated the deploy directory
   if ! File.directory?(config["deploy"])
-    puts "Cloning the gh-pages branch"
-    sh "git clone -b gh-pages git@github.com:#{config["git"]["user"]}/#{config["git"]["repo"]}.git _deploy"
+    puts "Cloning the #{config["git"]["branch"]} branch"
+    sh "git clone -b #{config["git"]["branch"]} git@github.com:#{config["git"]["user"]}/#{config["git"]["repo"]}.git _deploy"
   else
     cd config["deploy"] do
       puts "Updating the gh-pages branch"
