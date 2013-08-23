@@ -2,10 +2,10 @@ name: Grupo de Usuários WordPress Brasil
 pygments: true
 permalink: /:categories/:title/
 exclude: [".editorconfig", "Rakefile", "README.md", "config.rb", "Gemfile*"]
-baseurl: http://wpbrasil.github.io/
+baseurl: http://wp.org.br/
 destination: ./_build
 deploy: ./_deploy
 git:
-  branch: gh-pages
+  branch: master
   user: wpbrasil
   repo: wpbrasil.github.io
